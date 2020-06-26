@@ -1,0 +1,12 @@
+import { Dispatch as ReduxDispatch, Store as ReduxStore, Action } from 'redux';
+
+// 이게 초기값 정의
+export type counterStateType = {
+  counter: number;
+};
+
+export type GetState = () => counterStateType;
+
+export type Dispatch = ReduxDispatch<Action<string>>;
+
+export type Store = ReduxStore<counterStateType, Action<string>>;

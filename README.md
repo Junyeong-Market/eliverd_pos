@@ -1,2 +1,3 @@
-# eliverd_pos
-make with react-electron-boilerplate
+#Eliverd-POS
+
+Create with react-electron-boilerplate
