@@ -2,11 +2,11 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import New from '../components/New';
 import { printtrash, trashTwice } from '../actions/new';
-import { counterStateType } from '../reducers/types';
+import { indexStateType } from '../reducers/types';
 
-function mapStateToProps(state: counterStateType) {
+function mapStateToProps(state: indexStateType) {
   return {
-    counter: state.counter
+    newstring: state.newstring
   };
 }
 

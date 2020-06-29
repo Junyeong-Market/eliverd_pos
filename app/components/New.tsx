@@ -5,17 +5,17 @@ import styles from './New.css';
 
 type Props = {
   printtrash: () => void;
-  counter: number;
+  newstring: string;
 };
 
 export default function New(props: Props) {
-  const { printtrash, counter } = props;
+  const { printtrash, newstring } = props;
   return (
     <div className={styles.container} data-tid="container">
       <h2>New</h2>
       <Link to={routes.HOME}>to Home</Link>
       <div>
-        {counter}
+        <h2>{newstring}</h2>
         <button onClick={printtrash} type="button">
           어째서인거야?
         </button>

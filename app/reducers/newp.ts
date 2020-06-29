@@ -2,10 +2,10 @@ import { Action } from 'redux';
 import { PRINTTRASH_NEW } from '../actions/new';
 
 // 이게 리듀서
-export default function newp(state = 0, action: Action<string>) {
+export default function newstring(state = '', action: Action<string>) {
   switch (action.type) {
     case PRINTTRASH_NEW:
-      return state + 1;
+      return '<h2>trash</h2>';
     default:
       return state;
   }
