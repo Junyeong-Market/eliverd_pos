@@ -13,6 +13,7 @@ body {
   font-weight: bold;
   text-align: center;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 h2 {
@@ -33,7 +34,7 @@ li {
 }
 
 a {
-  color: white;
+  color: black;
   opacity: 0.80;
   text-decoration: none;
 }

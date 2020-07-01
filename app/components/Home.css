@@ -1,45 +1,115 @@
-.container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: left;
+input {
+  padding: 0;
 }
 
-.container .box1 {
+.banner {
+  width: auto;
+  height: 50px;
+  background-color: #09bbfe;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.banner_text {
+  font-family: NotoSansCJKkr;
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  padding: 8px;
+  padding-left: 16px;
+  letter-spacing: normal;
+  color: #333333;
+}
+
+#login_container {
+  width: 400px;
+  height: 400px;
+  margin: calc(50vh - 225px) auto;
+}
+
+.textfield {
   position: relative;
-  left : -webkit-calc(50% - 240px - 8px); /* for Chrome, Safari */
-  width: 480px;
-  height: 60px;
+  top: -3px;
+  width: 240px;
+  height: 24px;
   border: solid 1px #707070;
   background-color: #ffffff;
-  text-align: center;
-  font-size: 40px;
+  margin-left: 10px;
 }
 
-.container .box2 {
-  margin-top:40px;
-  position: absolute;
-  left : -webkit-calc(50% - 400px - 8px); /* for Chrome, Safari */
-  width: -webkit-calc(820px);
-  height: 410px;
-  float: left;
-  border: solid 1px #404040;
+.chk_option {
+  position: relative;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  border: solid 1px #707070;
   background-color: #ffffff;
+}
+
+.btn_login {
+  width: 320px;
+  height: 40px;
+  border-radius: 16px;
+  background-color: #09bbfe;
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
   text-align: center;
-  font-size: 40px;
+  color: #ffffff;
+  margin: 10px 0;
 }
 
-.Selector {
-  position: static;
-  margin:20px;
-  float:left;
-  width:360px;
-  height:360px;
-  background-color: white;
-  border: solid 4px #404040;
+.label_font {
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: right;
+  color: #4d4d4d;
 }
 
-.container a {
-  font-size: 1.4rem;
-  color: #707070;
+.join_font {
+  position: relative;
+  top: -8px;
+  font-family: NotoSansCJKkr;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4d4d4d;
+}
+
+.input_area {
+  margin: 16px;
+  margin-right: 40px;
+  text-align: right;
+}
+
+.chk_area {
+  position: relative;
+  top: -12px;
+  left: 32px;
+  vertical-align: top;
+  font-family: NotoSansCJKkr;
+  font-size: 16px;
+  color: #4d4d4d;
+}
+
+.Eliverd_logo {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 10px;
 }

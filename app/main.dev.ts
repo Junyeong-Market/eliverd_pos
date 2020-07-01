@@ -56,8 +56,12 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1080,
+    width: 1280,
     height: 720,
+    center: true,
+    minHeight: 600,
+    minWidth: 800,
+    icon: path.join(__dirname, '../resources/icons/64x64.png'),
     webPreferences:
       process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true'
         ? {
