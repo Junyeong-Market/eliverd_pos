@@ -3,6 +3,8 @@ input {
 }
 
 .banner {
+  display: flex;
+  align-items: center;
   width: auto;
   height: 50px;
   background-color: #09bbfe;
@@ -11,13 +13,14 @@ input {
 }
 
 .banner_text {
+  position: relative;
   font-family: NotoSansCJKkr;
+  top: -2px;
   text-align: left;
   font-size: 24px;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
-  padding: 8px;
   padding-left: 16px;
   letter-spacing: normal;
   color: #333333;
