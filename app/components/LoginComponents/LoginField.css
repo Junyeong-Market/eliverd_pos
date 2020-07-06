@@ -1,0 +1,44 @@
+input {
+  padding: 0;
+}
+
+#login_container {
+  width: 400px;
+  height: 400px;
+  margin: calc(50vh - 225px) auto;
+}
+
+.textfield {
+  position: relative;
+  top: -3px;
+  width: 240px;
+  height: 24px;
+  border: solid 1px #707070;
+  background-color: #ffffff;
+  margin-left: 10px;
+}
+
+.label_font {
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: right;
+  color: #4d4d4d;
+}
+
+.input_area {
+  margin: 16px;
+  margin-right: 40px;
+  text-align: right;
+}
+
+.Eliverd_logo {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 10px;
+}

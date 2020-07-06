@@ -19,6 +19,10 @@ export default function New(props: Props) {
         <button onClick={printtrash} type="button">
           어째서인거야?
         </button>
+
+        <button onClick={printtrash} type="button">
+          TEST1(로그인)
+        </button>
       </div>
     </div>
   );

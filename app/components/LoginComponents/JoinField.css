@@ -1,0 +1,68 @@
+input {
+  padding: 0;
+}
+
+#join_container {
+  width: 400px;
+  height: 250px;
+  margin: calc(50vh - 150px) auto;
+}
+
+.textfield {
+  position: relative;
+  top: -3px;
+  width: 240px;
+  height: 24px;
+  border: solid 1px #707070;
+  background-color: #ffffff;
+  margin-left: 10px;
+}
+
+.btn_login {
+  width: 320px;
+  height: 40px;
+  border-radius: 16px;
+  background-color: #09bbfe;
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  margin: 10px 0;
+}
+
+.label_font {
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: right;
+  color: #4d4d4d;
+}
+
+.join_font {
+  position: relative;
+  top: -8px;
+  font-family: NotoSansCJKkr;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4d4d4d;
+}
+
+.input_area {
+  margin: 16px;
+  margin-right: 40px;
+  text-align: right;
+}
