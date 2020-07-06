@@ -5,8 +5,8 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
 body {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   position: relative;
   background-color: #ffffff;
   color: #4d4d4d;
@@ -18,7 +18,7 @@ body {
 
 h2 {
   margin: 0;
-  padding:0;
+  padding: 0;
   vertical-align: top;
   font-size: 56px;
   font-weight: bold;
@@ -35,7 +35,6 @@ li {
 
 a {
   color: black;
-  opacity: 0.80;
   text-decoration: none;
 }
 

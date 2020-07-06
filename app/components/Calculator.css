@@ -1,0 +1,129 @@
+.btn_link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 32px;
+  text-align: center;
+  border-radius: 0px;
+  background-color: #009ad5;
+  margin-left: 8px;
+}
+
+.btn_Setting {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+}
+
+.btn_link:hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 32px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #77daff;
+  margin-left: 8px;
+}
+
+#ItemList_Box {
+  float: left;
+  width: 60vw;
+  height: calc(100vh - 120px);
+  margin: 32px;
+  border: solid 1.5px #707070;
+  background-color: #dddddd;
+}
+
+#AddedItemList_Box {
+  float: right;
+  width: calc(40vw - 102px);
+  height: calc(100vh - 240px);
+  min-height: 280px;
+  margin-right: 32px;
+  margin-top: 32px;
+  border: solid 1.5px #707070;
+  background-color: #dddddd;
+}
+
+#ResultCost_Box {
+  float: right;
+  margin-right: 32px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: calc(40vw - 102px);
+  height: 50px;
+  border: solid 1.5px #707070;
+  background-color: #dddddd;
+}
+
+#Btn_Box {
+  float: right;
+  margin-right: 32px;
+  width: calc(40vw - 102px);
+}
+
+#link_area {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 8px;
+}
+
+.btn_link_font {
+  position: relative;
+  top: -2px;
+  font-family: NotoSansCJKkr;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.btn_font {
+  font-family: NotoSansCJKkr;
+  font-size: 32px;
+  text-align: center;
+  color: #4d4d4d;
+}
+
+.btn_reset {
+  margin-right: 2vw;
+  width: calc(calc(38vw - 102px) / 2);
+  height: 50px;
+}
+
+.btn_submit {
+  width: calc(calc(38vw - 102px) / 2);
+  height: 50px;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  width: auto;
+  height: 50px;
+  background-color: #09bbfe;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.banner_text {
+  position: relative;
+  font-family: NotoSansCJKkr;
+  top: -2px;
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  padding-left: 16px;
+  letter-spacing: normal;
+  color: #333333;
+}

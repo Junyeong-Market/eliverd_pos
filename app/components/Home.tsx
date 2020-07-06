@@ -35,7 +35,7 @@ export default function Home() {
           <input type="submit" value="로그인" className={styles.btn_login} />
         </form>
         <div>
-          <Link to={routes.COUNTER} className={styles.join_font}>
+          <Link to={routes.CALCULATOR} className={styles.join_font}>
             아직 회원이 아니십니까?
           </Link>
         </div>
