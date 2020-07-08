@@ -1,11 +1,37 @@
+/* eslint-disable import/named */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styles from './LoginField.css';
 import routes from '../../constants/routes.json';
 import imgE from '../../../resources/inappIcon/Eliverd_200px.png';
+import { loginCheck } from '../../apis/loginapi';
 
 const LoginField = () => {
+  const history = useHistory();
+  const [state, setState] = useState({
+    id: '',
+    password: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setState(prevState => ({
+      ...prevState,
+      [id]: value
+    }));
+  };
+
+  const handleSubmitClick = async (e: React.MouseEvent<HTMLInputElement>) => {
+    console.log(localStorage.getItem('nickname'));
+    e.preventDefault();
+    if (await loginCheck(state.id, state.password)) {
+      history.push(routes.CALCULATOR);
+    } else {
+      history.push(routes.HOME);
+    }
+  };
+
   return (
     <div id={styles.login_container}>
       <img src={imgE} className={styles.Eliverd_logo} alt="imgE" />
@@ -13,13 +39,27 @@ const LoginField = () => {
         <div className={styles.input_area}>
           <label className={styles.label_font}>
             아이디
-            <input type="text" name="id" className={styles.textfield} />
+            <input
+              type="text"
+              name="id"
+              id="id"
+              className={styles.textfield}
+              value={state.id}
+              onChange={handleChange}
+            />
           </label>
         </div>
         <div className={styles.input_area}>
           <label className={styles.label_font}>
             패스워드
-            <input type="password" name="pwd" className={styles.textfield} />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className={styles.textfield}
+              value={state.password}
+              onChange={handleChange}
+            />
           </label>
         </div>
         <div className={styles.chk_area}>
@@ -28,10 +68,15 @@ const LoginField = () => {
           <input type="checkbox" className={styles.chk_option} />
           아이디 저장
         </div>
-        <input type="submit" value="로그인" className={styles.btn_login} />
+        <input
+          type="button"
+          value="로그인"
+          className={styles.btn_login}
+          onClick={handleSubmitClick}
+        />
       </form>
       <div>
-        <Link to={routes.CALCULATOR} className={styles.join_font}>
+        <Link to={routes.JOIN} className={styles.join_font}>
           아직 회원이 아니십니까?
         </Link>
       </div>

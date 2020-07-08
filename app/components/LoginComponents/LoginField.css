@@ -8,6 +8,56 @@ input {
   margin: calc(50vh - 225px) auto;
 }
 
+.btn_login {
+  width: 320px;
+  height: 40px;
+  border-radius: 16px;
+  background-color: #09bbfe;
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  margin: 10px 0;
+}
+
+.join_font {
+  position: relative;
+  top: -8px;
+  font-family: NotoSansCJKkr;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4d4d4d;
+}
+
+.chk_option {
+  position: relative;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  border: solid 1px #707070;
+  background-color: #ffffff;
+}
+
+.chk_area {
+  position: relative;
+  top: -12px;
+  left: 32px;
+  vertical-align: top;
+  font-family: NotoSansCJKkr;
+  font-size: 16px;
+  color: #4d4d4d;
+}
+
 .textfield {
   position: relative;
   top: -3px;

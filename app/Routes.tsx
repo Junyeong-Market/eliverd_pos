@@ -6,6 +6,7 @@ import HomePage from './containers/HomePage';
 import CounterPage from './containers/CounterPage';
 import NewPage from './containers/NewPage';
 import CalcPage from './containers/CalcPage';
+import JoinPage from './containers/JoinPage';
 
 export default function Routes() {
   return (
@@ -14,6 +15,7 @@ export default function Routes() {
         <Route path={routes.NEW} component={NewPage} />
         <Route path={routes.CALCULATOR} component={CalcPage} />
         <Route path={routes.COUNTER} component={CounterPage} />
+        <Route path={routes.JOIN} component={JoinPage} />
         <Route path={routes.HOME} component={HomePage} />
       </Switch>
     </App>

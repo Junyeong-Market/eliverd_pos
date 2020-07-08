@@ -1,5 +1,6 @@
 {
   "HOME": "/",
+  "JOIN": "/join",
   "COUNTER": "/counter",
   "CALCULATOR": "/calc",
   "NEW": "/new"
