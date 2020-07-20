@@ -3,5 +3,7 @@
   "JOIN": "/join",
   "COUNTER": "/counter",
   "CALCULATOR": "/calc",
-  "NEW": "/new"
+  "SELECTSTORE": "/selectstore",
+  "NEW": "/new",
+  "W_SR": "/w_sr"
 }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './JoinField.css';
 import routes from '../../constants/routes.json';
-import { join } from '../../apis/loginapi';
+import { join } from '../../apis/accountApi';
 
 const JoinField = () => {
   const history = useHistory();
@@ -25,10 +25,8 @@ const JoinField = () => {
   const handleSubmitClick = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (await join(state.id, state.password, state.realname, state.nickname)) {
-      console.log('true');
       history.push(routes.HOME);
     } else {
-      console.log('false');
       history.push(routes.JOIN);
     }
   };
@@ -85,7 +83,7 @@ const JoinField = () => {
           </label>
         </div>
         <input
-          type="button"
+          type="submit"
           value="회원가입"
           className={styles.btn_login}
           onClick={handleSubmitClick}

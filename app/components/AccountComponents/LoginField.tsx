@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from './LoginField.css';
 import routes from '../../constants/routes.json';
 import imgE from '../../../resources/inappIcon/Eliverd_200px.png';
-import { loginCheck } from '../../apis/loginapi';
+import { loginCheck } from '../../apis/accountApi';
 
 const LoginField = () => {
   const history = useHistory();
@@ -23,10 +23,10 @@ const LoginField = () => {
   };
 
   const handleSubmitClick = async (e: React.MouseEvent<HTMLInputElement>) => {
-    console.log(localStorage.getItem('nickname'));
     e.preventDefault();
     if (await loginCheck(state.id, state.password)) {
-      history.push(routes.CALCULATOR);
+      console.log(localStorage.getItem('session'));
+      history.push(routes.SELECTSTORE);
     } else {
       history.push(routes.HOME);
     }
@@ -69,7 +69,7 @@ const LoginField = () => {
           아이디 저장
         </div>
         <input
-          type="button"
+          type="submit"
           value="로그인"
           className={styles.btn_login}
           onClick={handleSubmitClick}

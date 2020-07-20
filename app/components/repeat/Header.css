@@ -24,17 +24,17 @@
 }
 
 #link_area {
-  position: relative;
-  width: 100%;
+  position: absolute;
+  left: calc(100vw - 408px);
   display: flex;
   justify-content: flex-end;
-  margin-right: 8px;
 }
 
 .btn_Setting {
+  position: absolute;
+  left: calc(100vw - 48px);
   width: 40px;
   height: 40px;
-  margin-right: 16px;
 }
 
 .btn_link {

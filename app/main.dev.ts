@@ -9,7 +9,7 @@
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -23,6 +23,7 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+let childWindow: BrowserWindow | null = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -59,8 +60,8 @@ const createWindow = async () => {
     width: 1280,
     height: 720,
     center: true,
-    minHeight: 600,
-    minWidth: 800,
+    minWidth: 1280,
+    minHeight: 720,
     icon: path.join(__dirname, '../resources/icons/64x64.png'),
     webPreferences:
       process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true'
@@ -92,6 +93,44 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
+  // #region 차일드 윈도우 하나 만들어봤다
+  childWindow = new BrowserWindow({
+    parent: mainWindow,
+    modal: true,
+    show: false,
+    width: 800,
+    height: 600,
+    resizable: false,
+    icon: path.join(__dirname, '../resources/icons/64x64.png'),
+    webPreferences:
+      process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true'
+        ? {
+            nodeIntegration: true
+          }
+        : {
+            preload: path.join(__dirname, 'dist/renderer.prod.js')
+          }
+  });
+
+  childWindow.loadURL(`file://${__dirname}/app.html#/W_SR`);
+
+  childWindow.webContents.on('did-finish-load', () => {
+    if (!childWindow) {
+      throw new Error('"childWindow" is not defined');
+    }
+    if (process.env.START_MINIMIZED) {
+      childWindow.minimize();
+    }
+    // 여기 변경점 있음
+  });
+
+  childWindow.on('close', e => {
+    e.preventDefault();
+    childWindow?.hide();
+  });
+
+  // #endregion
+
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 
@@ -118,4 +157,10 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
+  if (childWindow === null) createWindow();
+});
+
+ipcMain.on('select-registerer', (event, arg) => {
+  console.log('왓어?');
+  childWindow?.show();
 });
