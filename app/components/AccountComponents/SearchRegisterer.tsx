@@ -8,7 +8,6 @@ import _ from 'lodash';
 import styles from './SearchRegisterer.css';
 import { SearchedArea, SelectedArea } from '../repeat';
 import { searchUser } from '../../apis/accountApi';
-import { NavLink } from 'react-router-dom';
 
 const SearchRegisterer = () => {
   const [state, setState] = useState({
