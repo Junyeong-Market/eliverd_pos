@@ -11,7 +11,6 @@ import imgSetting from '../../../resources/inappIcon/settings@2x.png';
 
 // 헤더 컴포넌트
 const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {
-  console.log(store_name.length);
   // 내비게이션이 없다면
   if (!nav) {
     return (

@@ -4,7 +4,7 @@ import { Header } from './repeat';
 import { JoinField } from './AccountComponents';
 
 // eslint-disable-next-line react/prop-types
-export default function Home() {
+export default function Join() {
   return (
     <div>
       <Header nav={false} />

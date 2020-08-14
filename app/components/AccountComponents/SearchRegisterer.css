@@ -12,13 +12,12 @@ input {
 }
 
 #login_container {
-  margin-top: 20px;
-  width: 400px;
-  height: 400px;
+  padding: 20px;
+  width: 480px;
+  height: 360px;
   text-align: center;
   display: inline-block;
   float: right;
-  margin-right: 20px;
 }
 
 .btn_login {
@@ -72,7 +71,8 @@ input {
 }
 
 .textfield {
-  width: 400px;
+  float: left;
+  width: 300px;
   height: 24px;
   border: solid 1px #707070;
   background-color: #ffffff;
@@ -98,17 +98,28 @@ input {
   border-radius: 10px;
 }
 
-.selected_register {
-  width: 180px;
+.search_register_area {
+  width: 480px;
   height: 200px;
-  float: left;
-  background-color: #dddddd;
 }
 
 .search_results {
-  width: 180px;
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+  float: left;
+  overflow-y: scroll;
+  resize: none;
+  background-color: #dddddd;
+}
+
+.selected_register {
+  margin: 10px;
+  width: 200px;
   height: 200px;
   float: right;
+  overflow-y: scroll;
+  resize: none;
   display: inline-block;
   background-color: #dddddd;
 }

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /* eslint-disable import/named */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './LoginField.css';
 import routes from '../../constants/routes.json';
+// @ts-ignore
 import imgE from '../../../resources/inappIcon/Eliverd_200px.png';
 import { loginCheck } from '../../apis/accountApi';
 

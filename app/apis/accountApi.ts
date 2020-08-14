@@ -116,9 +116,11 @@ const join = async (id = '', pwd = '', real = '', nick = '') => {
   }
 };
 
+// 사람 이름가지고 조회하는 api
 const searchUser = async (name = '') => {
   const param_page = 1;
   const param_pageSize = 20;
+  if (name === '') return [{}];
   const response = await axios.get(
     `http://donote.co:8000/account/user/search/${name}/?page=${param_page}&page_size=${param_pageSize}&is_seller=True`
   );
@@ -127,7 +129,7 @@ const searchUser = async (name = '') => {
   if (data.count !== 0) {
     console.log(data.results);
   }
-  return response;
+  return response.data.results;
 };
 
 export { loginCheck, logout, checkUserInfo, join, searchUser };
