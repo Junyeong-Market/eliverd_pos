@@ -9,8 +9,9 @@
 
 import React, { useEffect } from 'react';
 import styles from './MapContent.css';
+import _apikey from '../../constants/apikey.json';
 
-const apikey = 'AIzaSyD8nq6nsny7jn8dLS7qACJ-CiPsnYH1h0o';
+const apikey = _apikey.GOOGLE;
 
 let map: google.maps.Map;
 // @ts-ignore

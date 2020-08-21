@@ -30,13 +30,12 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {
           <div className={styles.btn_link_font}>재고</div>
         </Link>
         <Link to={routes.SELECTSTORE} className={styles.btn_link}>
-          <div className={styles.btn_link_font}>상점</div>
+          <div className={styles.btn_link_font}>주문</div>
         </Link>
         <Link to={routes.HOME} className={styles.btn_link}>
-          <div className={styles.btn_link_font}>매출</div>
+          <div className={styles.btn_link_font}>설정</div>
         </Link>
       </div>
-      <img src={imgSetting} className={styles.btn_Setting} alt="Setting" />
     </div>
   );
 };
