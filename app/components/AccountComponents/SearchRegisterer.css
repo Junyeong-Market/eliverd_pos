@@ -76,7 +76,7 @@ input {
   height: 24px;
   border: solid 1px #707070;
   background-color: #ffffff;
-  margin-bottom: 10px;
+  margin: 10px;
 }
 
 .label_font {

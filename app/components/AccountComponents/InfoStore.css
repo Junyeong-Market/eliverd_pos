@@ -1,0 +1,75 @@
+#select_store_container {
+  width: 800px;
+  height: 400px;
+  margin: calc(50vh - 225px) auto;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.btn_create {
+  position: relative;
+  bottom: 20px;
+  left: 640px;
+  width: 120px;
+  height: 40px;
+  border-radius: 16px;
+  background-color: white;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.45;
+  text-align: center;
+  color: #000000;
+  margin: 10px;
+}
+
+.label {
+  font-family: NotoSansCJKkr;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 100;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #333333;
+  margin: 20px;
+}
+
+input {
+  margin-top: 10px;
+  height: 20px;
+}
+
+.location {
+  width: 50px;
+}
+
+.location_label {
+  margin-left: 20px;
+}
+
+.findRegisterer {
+  float: right;
+  position: relative;
+  bottom: 300px;
+  right: 20px;
+  font-family: NotoSansCJKkr;
+  font-size: 16px;
+  font-weight: 100;
+  color: #333333;
+}
+
+#create_store_div {
+  float: left;
+}
+
+.btn_fl {
+  position: relative;
+  left: 40px;
+  width: 120px;
+  height: 30px;
+  text-align: center;
+}

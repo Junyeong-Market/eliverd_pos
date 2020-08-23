@@ -55,7 +55,9 @@ const SearchRegisterer = () => {
 
   return (
     <div id={styles.login_container}>
-      이름으로 직원 찾기
+      <div style={{ textAlign: 'left', marginLeft: '10px' }}>
+        이름으로 직원 찾기
+      </div>
       <form>
         <div>
           <input
