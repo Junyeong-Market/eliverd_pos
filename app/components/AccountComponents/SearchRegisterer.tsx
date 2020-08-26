@@ -8,14 +8,19 @@ import _ from 'lodash';
 import styles from './SearchRegisterer.css';
 import { SearchedArea, SelectedArea } from '../repeat';
 import { searchUser } from '../../apis/accountApi';
+import Alert from '../repeat/Alert';
 
-const SearchRegisterer = () => {
+const SearchRegisterer = ({ parentFunc }) => {
   const [state, setState] = useState({
     searchedBoards: [{}],
     selectedBoards: [{}]
   });
 
   const { searchedBoards, selectedBoards } = state;
+
+  const sendDataToParent = data => {
+    parentFunc(data);
+  };
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -37,6 +42,7 @@ const SearchRegisterer = () => {
       ...prevState,
       selectedBoards: temp
     }));
+    sendDataToParent(temp);
   };
 
   const removeSelectedRegister = (_realname: string, _nickname: string) => {
@@ -51,6 +57,7 @@ const SearchRegisterer = () => {
       ...prevState,
       selectedBoards: temp
     }));
+    sendDataToParent(temp);
   };
 
   return (

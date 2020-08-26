@@ -49,3 +49,21 @@
 #menu_wrap .option button {
   margin-left: 5px;
 }
+
+.mapStyle {
+  width: 100%;
+  height: calc(100vh - 50px);
+  position: relative;
+  overflow: hidden;
+}
+
+.searchWindow {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: 20px 0 30px 10px;
+  width: 300px;
+  height: 30px;
+}

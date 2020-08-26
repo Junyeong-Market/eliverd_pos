@@ -14,6 +14,8 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
+const url = require('url');
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -69,11 +71,19 @@ const createWindow = async () => {
             nodeIntegration: true
           }
         : {
-            preload: path.join(__dirname, 'dist/renderer.prod.js')
+            // preload: path.join(__dirname, './dist/renderer.prod.js')
+            nodeIntegration: true
           }
   });
+  mainWindow.setMenuBarVisibility(false);
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, './app.html'),
+      protocol: 'file',
+      slashes: true
+    })
+  );
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -108,11 +118,14 @@ const createWindow = async () => {
             nodeIntegration: true
           }
         : {
-            preload: path.join(__dirname, 'dist/renderer.prod.js')
+            // preload: path.join(__dirname, 'dist/renderer.prod.js')
+            nodeIntegration: true
           }
   });
 
   childWindow.loadURL(`file://${__dirname}/app.html#/W_SR`);
+
+  childWindow.setMenuBarVisibility(false);
 
   childWindow.webContents.on('did-finish-load', () => {
     if (!childWindow) {
@@ -160,7 +173,13 @@ app.on('activate', () => {
   if (childWindow === null) createWindow();
 });
 
-ipcMain.on('select-registerer', (event, arg) => {
-  console.log('왓어?');
+let sender: Electron.WebContents;
+
+ipcMain.on('openGoogleMaps', (event, arg) => {
   childWindow?.show();
+  sender = event.sender;
+});
+
+ipcMain.on('sendPositionData', (event, arg1, arg2) => {
+  sender.send('setLatLng', arg1, arg2);
 });

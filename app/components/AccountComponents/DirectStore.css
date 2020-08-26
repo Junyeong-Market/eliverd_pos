@@ -1,7 +1,7 @@
-#select_store_container {
+#introduce_place {
   width: 800px;
-  height: 480px;
-  margin: calc(50vh - 265px) auto;
+  height: 400px;
+  margin: calc(50vh - 225px) auto;
   border: 1px solid #dadce0;
   border-radius: 10px;
   text-align: left;

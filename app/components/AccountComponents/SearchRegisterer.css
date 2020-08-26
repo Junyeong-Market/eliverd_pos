@@ -106,7 +106,7 @@ input {
 .search_results {
   margin: 10px;
   width: 200px;
-  height: 200px;
+  height: 300px;
   float: left;
   overflow-y: scroll;
   resize: none;
@@ -116,7 +116,7 @@ input {
 .selected_register {
   margin: 10px;
   width: 200px;
-  height: 200px;
+  height: 300px;
   float: right;
   overflow-y: scroll;
   resize: none;

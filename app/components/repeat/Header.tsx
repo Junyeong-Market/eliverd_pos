@@ -32,7 +32,7 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {
         <Link to={routes.SELECTSTORE} className={styles.btn_link}>
           <div className={styles.btn_link_font}>주문</div>
         </Link>
-        <Link to={routes.HOME} className={styles.btn_link}>
+        <Link to={routes.CKS} className={styles.btn_link}>
           <div className={styles.btn_link_font}>설정</div>
         </Link>
       </div>

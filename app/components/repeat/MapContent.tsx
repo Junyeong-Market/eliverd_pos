@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-shadow */
 /* eslint-disable no-loop-func */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
@@ -10,25 +12,25 @@
 import React, { useEffect } from 'react';
 import styles from './MapContent.css';
 import _apikey from '../../constants/apikey.json';
+import Alert from './Alert';
+
+const electron = window.require('electron');
+const { ipcRenderer } = electron;
 
 const apikey = _apikey.GOOGLE;
 
 let map: google.maps.Map;
+let clicked_markers: google.maps.Marker[] = [];
 // @ts-ignore
 window.initMap = () => {
   map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
-    center: { lat: 37.33, lng: 126.58 },
-    zoom: 14
+    center: { lat: 37.5516957, lng: 126.99251 },
+    zoom: 14,
+    disableDefaultUI: true
   });
 };
 
 const MapContent = () => {
-  const mapStyle = {
-    width: '100%',
-    height: '100%',
-    position: 'relative',
-    overflow: 'hidden'
-  };
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
@@ -46,27 +48,69 @@ const MapContent = () => {
       });
       let markers: google.maps.Marker[] = [];
 
-      const infowindow = new google.maps.InfoWindow({
-        content: `contentString`
+      map.addListener('click', function(e: google.maps.MapsEventListener) {
+        placeMarkerAndPanTo(e.latLng, map);
       });
 
-      infowindow.openAdvanced = (
-        _map: google.maps.Map,
-        _marker: google.maps.Marker,
-        _title: string,
-        _position: google.maps.LatLng
-      ) => {
-        infowindow.setContent(
-          `<div><div>타이틀 : ${_title}</div><div>포지션: ${_position.lat()}, ${_position.lng()}</div></div>`
+      const geocoder = new google.maps.Geocoder();
+
+      const openCheckWindow = (_marker: google.maps.Marker) => {
+        geocoder.geocode(
+          { location: _marker.getPosition() },
+          async (
+            results: google.maps.GeocoderResult[],
+            status: google.maps.GeocoderStatus
+          ) => {
+            if (status === 'OK') {
+              if (results[0]) {
+                const resp = await Alert(
+                  ['확인', '취소'],
+                  `${results[0].formatted_address}
+위도: ${_marker.getPosition().lat()}, 경도: ${_marker.getPosition().lng()}
+가 맞습니까?`,
+                  '장소 확인'
+                );
+                if (resp === 0)
+                  ipcRenderer.send(
+                    'sendPositionData',
+                    _marker.getPosition().lat(),
+                    _marker.getPosition().lng()
+                  );
+              } else {
+                window.alert('No results found');
+              }
+            } else {
+              window.alert('Geocoder failed due to: ' + status);
+            }
+          }
         );
-        infowindow.open(_map, _marker);
       };
+
+      function placeMarkerAndPanTo(
+        latLng: google.maps.LatLng,
+        map: google.maps.Map
+      ) {
+        // Clear out the old markers.
+        clicked_markers.forEach(marker => {
+          marker.setMap(null);
+        });
+        clicked_markers = [];
+        const clicked_marker = new google.maps.Marker({
+          position: latLng,
+          map
+        });
+        clicked_markers.push(clicked_marker);
+        clicked_marker.addListener('click', function(e) {
+          openCheckWindow(clicked_marker);
+        });
+        map.panTo(latLng);
+      }
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', () => {
         const places = searchBox.getPlaces();
 
-        if (places.length == 0) {
+        if (places.length === 0) {
           return;
         }
 
@@ -99,12 +143,7 @@ const MapContent = () => {
           });
 
           marker.addListener('click', () => {
-            infowindow.openAdvanced(
-              map,
-              marker,
-              place.name,
-              place.geometry.location
-            );
+            openCheckWindow(marker);
           });
 
           // Create a marker for each place.
@@ -123,20 +162,13 @@ const MapContent = () => {
   });
   return (
     <div className={styles.map_wrap}>
+      <div id="map" className={styles.mapStyle} />
       <input
         id="pac-input"
         type="text"
-        placeholder="Search Box"
-        style={{
-          zIndex: 1,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          margin: '50px 0 30px 10px'
-        }}
+        placeholder="검색 창"
+        className={styles.searchWindow}
       />
-      <div id="map" style={mapStyle} />
     </div>
   );
 };

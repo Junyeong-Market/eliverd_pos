@@ -8,12 +8,14 @@ import CalcPage from './containers/CalcPage';
 import JoinPage from './containers/JoinPage';
 import SSPage from './containers/SSPage';
 import WSRPage from './containers/W_searchRegisterer';
+import CKSPage from './containers/CheckStorePage';
 
 export default function Routes() {
   return (
     <App>
       <Switch>
         <Route path={routes.CALCULATOR} component={CalcPage} />
+        <Route path={routes.CKS} component={CKSPage} />
         <Route path={routes.COUNTER} component={CounterPage} />
         <Route path={routes.JOIN} component={JoinPage} />
         <Route path={routes.SELECTSTORE} component={SSPage} />

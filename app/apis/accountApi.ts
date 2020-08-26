@@ -101,7 +101,7 @@ const join = async (id = '', pwd = '', real = '', nick = '') => {
 
     await Alert(
       ['확인'],
-      `환영합니다 ${response.data.nickname}님. 로그인 해주세요.`,
+      `환영합니다 ${nick}님. 로그인 해주세요.`,
       '회원가입 성공'
     );
 
