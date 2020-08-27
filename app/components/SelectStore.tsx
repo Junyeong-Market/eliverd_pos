@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { Header } from './repeat';
 import { SearchRegisterer, InfoStore } from './AccountComponents';
 import styles from './SelectStore.css';
-import Alert from './repeat/Alert';
 import createStore from '../apis/storeApi';
 
 function useAsyncState(initialValue) {
@@ -20,24 +19,14 @@ function useAsyncState(initialValue) {
 
 // eslint-disable-next-line react/prop-types
 export default function SelectStore() {
-  const [selectedBoards, setSelectedBoards] = useAsyncState([{}]);
+  const [selectedPIDs, setSelectedPIDs] = useAsyncState([]);
 
   const loadDataFromSearchRegisterer = async data => {
-    await setSelectedBoards(data);
+    await setSelectedPIDs(data);
   };
 
   const loadDataFromInfoStore = data => {
-    Alert(
-      ['확인'],
-      `${data.name}
-${data.desc}
-${data.reginum}
-${data.lat}
-${data.lng}
-${selectedBoards[0].realname} 외 ${selectedBoards.length - 1}명`,
-      '확인'
-    );
-    // createStore(info.name, info.desc, info.reginum, info.lat, info.lng);
+    createStore(selectedPIDs, data);
   };
 
   return (

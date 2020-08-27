@@ -7,7 +7,11 @@ import styles from './LoginField.css';
 import routes from '../../constants/routes.json';
 // @ts-ignore
 import imgE from '../../../resources/inappIcon/Eliverd_200px.png';
-import { loginCheck } from '../../apis/accountApi';
+import {
+  loginCheck,
+  checkUserInfo,
+  checkUserStore
+} from '../../apis/accountApi';
 
 const LoginField = () => {
   const history = useHistory();
@@ -27,8 +31,14 @@ const LoginField = () => {
   const handleSubmitClick = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (await loginCheck(state.id, state.password)) {
-      console.log(localStorage.getItem('session'));
+      await checkUserInfo();
+      const { count, results } = await checkUserStore();
       history.push(routes.SELECTSTORE);
+      // if (count === 0) {
+      //   history.push(routes.CKS);
+      // } else {
+
+      // }
     } else {
       history.push(routes.HOME);
     }

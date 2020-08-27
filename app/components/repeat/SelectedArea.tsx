@@ -4,21 +4,21 @@
 import React from 'react';
 import styles from './S_Area.css';
 
-const SelectedArea = ({ realname = '', nickname = '', customClickEvent }) => {
+const SelectedArea = ({ userData = {}, customClickEvent }) => {
   const childClickEvent = () => {
-    customClickEvent(realname, nickname);
+    customClickEvent(userData);
   };
-  if (realname !== '' && nickname !== '') {
+  if (Object.keys(userData).length !== 0) {
     return (
       <div className={styles.custom_button} onClick={childClickEvent}>
-        이름 : {realname}
+        이름 : {userData.realname}
         <br />
-        닉네임 : {nickname}
+        닉네임 : {userData.nickname}
         <hr />
       </div>
     );
   }
-  return <span> 검색 결과 </span>;
+  return <span> 선택한 직원 </span>;
 };
 
 export default SelectedArea;

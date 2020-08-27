@@ -15,7 +15,6 @@ const loginCheck = async (id = '', pwd = '') => {
     ).data;
 
     localStorage.setItem('session', session);
-    console.log(session);
     return true;
   } catch (error) {
     Alert(['확인'], '아이디 또는 비밀번호를 확인해주세요', '로그인 실패');
@@ -46,6 +45,23 @@ const checkUserInfo = async () => {
   localStorage.setItem('nickname', response.data.nickname);
   localStorage.setItem('realname', response.data.realname);
   localStorage.setItem('is_seller', response.data.is_seller);
+};
+
+// 권한있는 상점 조회
+const checkUserStore = async () => {
+  const param_page = 1;
+  const param_pageSize = 20;
+  const response = await axios.get(
+    `http://donote.co:8000/account/user/${localStorage.getItem(
+      'pid'
+    )}/stores/?page=${param_page}&page_size=${param_pageSize}`,
+    {
+      headers: {
+        Authorization: localStorage.getItem('session')
+      }
+    }
+  );
+  return response.data;
 };
 
 const checkJoinError = async (errdata: AxiosError) => {
@@ -132,4 +148,4 @@ const searchUser = async (name = '') => {
   return response.data.results;
 };
 
-export { loginCheck, logout, checkUserInfo, join, searchUser };
+export { loginCheck, logout, checkUserInfo, join, searchUser, checkUserStore };

@@ -71,7 +71,6 @@ const createWindow = async () => {
             nodeIntegration: true
           }
         : {
-            // preload: path.join(__dirname, './dist/renderer.prod.js')
             nodeIntegration: true
           }
   });
@@ -118,7 +117,6 @@ const createWindow = async () => {
             nodeIntegration: true
           }
         : {
-            // preload: path.join(__dirname, 'dist/renderer.prod.js')
             nodeIntegration: true
           }
   });

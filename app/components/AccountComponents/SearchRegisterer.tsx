@@ -8,7 +8,6 @@ import _ from 'lodash';
 import styles from './SearchRegisterer.css';
 import { SearchedArea, SelectedArea } from '../repeat';
 import { searchUser } from '../../apis/accountApi';
-import Alert from '../repeat/Alert';
 
 const SearchRegisterer = ({ parentFunc }) => {
   const [state, setState] = useState({
@@ -19,7 +18,8 @@ const SearchRegisterer = ({ parentFunc }) => {
   const { searchedBoards, selectedBoards } = state;
 
   const sendDataToParent = data => {
-    parentFunc(data);
+    const pids = data.map(d => d.pid);
+    parentFunc(pids);
   };
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,13 +31,12 @@ const SearchRegisterer = ({ parentFunc }) => {
     }));
   };
 
-  const addSelectedRegister = (_realname: string, _nickname: string) => {
+  const addSelectedRegister = (userData: {}) => {
     let temp = state.selectedBoards;
-    const object = { realname: _realname, nickname: _nickname };
     if (_.isEmpty(temp[0])) {
-      temp = [object];
-    } else if (temp.findIndex(i => i.nickname === _nickname) === -1)
-      temp.push(object);
+      temp = [userData];
+    } else if (temp.findIndex(i => i.nickname === userData.nickname) === -1)
+      temp.push(userData);
     setState(prevState => ({
       ...prevState,
       selectedBoards: temp
@@ -45,11 +44,10 @@ const SearchRegisterer = ({ parentFunc }) => {
     sendDataToParent(temp);
   };
 
-  const removeSelectedRegister = (_realname: string, _nickname: string) => {
+  const removeSelectedRegister = (userData: {}) => {
     let temp = state.selectedBoards;
-    const object = { realname: _realname, nickname: _nickname };
     temp.splice(
-      temp.findIndex(i => i.nickname === _nickname),
+      temp.findIndex(i => i.nickname === userData.nickname),
       1
     );
     if (temp.length === 0) temp = [{}];
@@ -81,8 +79,7 @@ const SearchRegisterer = ({ parentFunc }) => {
           {searchedBoards.map((row, index) => (
             <SearchedArea
               key={index}
-              realname={row.realname}
-              nickname={row.nickname}
+              userData={row}
               customClickEvent={addSelectedRegister}
             />
           ))}
@@ -91,8 +88,7 @@ const SearchRegisterer = ({ parentFunc }) => {
           {selectedBoards.map((row, index) => (
             <SelectedArea
               key={index}
-              realname={row.realname}
-              nickname={row.nickname}
+              userData={row}
               customClickEvent={removeSelectedRegister}
             />
           ))}
