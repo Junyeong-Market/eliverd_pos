@@ -1,0 +1,8 @@
+#create_store_container {
+  width: 800px;
+  height: 480px;
+  margin: calc(50vh - 265px) auto;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  text-align: left;
+}

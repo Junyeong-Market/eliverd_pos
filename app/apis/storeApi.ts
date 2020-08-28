@@ -23,10 +23,9 @@ const createStore = async (regis: [], info) => {
 
   const { data } = response;
 
-  console.log(`${data.id} ${data.name}`);
-
   localStorage.setItem('store_name', data.name);
-  console.log(data.name);
+  localStorage.setItem('store_id', data.id);
+  return data;
 };
 
 export default createStore;

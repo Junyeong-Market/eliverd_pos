@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../../constants/routes.json';
+import styles from './DirectStore.css';
 
 // eslint-disable-next-line react/prop-types
 const DirectStore = () => {
@@ -16,16 +17,11 @@ const DirectStore = () => {
           서비스를 새로 접하는 상점이라면 아래의 버튼을 클릭해 새로운 상점을
           만들어 주세요.
         </div>
-        <Link to={routes.SELECTSTORE}>
+        <Link to={routes.CREATESTORE}>
           <input
             type="button"
             value="바로가기"
-            style={{
-              width: '200px',
-              height: '60px',
-              marginTop: '100px',
-              fontSize: '28px'
-            }}
+            className={styles.btn_link_create}
           />
         </Link>
       </div>

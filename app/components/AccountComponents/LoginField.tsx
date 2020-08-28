@@ -12,6 +12,7 @@ import {
   checkUserInfo,
   checkUserStore
 } from '../../apis/accountApi';
+import { cpuUsage } from 'process';
 
 const LoginField = () => {
   const history = useHistory();
@@ -32,13 +33,13 @@ const LoginField = () => {
     e.preventDefault();
     if (await loginCheck(state.id, state.password)) {
       await checkUserInfo();
-      const { count, results } = await checkUserStore();
-      history.push(routes.SELECTSTORE);
-      // if (count === 0) {
-      //   history.push(routes.CKS);
-      // } else {
-
-      // }
+      const data = await checkUserStore();
+      console.log(data.results.length);
+      if (data.results.length === 0) {
+        history.push(routes.CKS);
+      } else {
+        history.push(routes.SELECTSTORE);
+      }
     } else {
       history.push(routes.HOME);
     }

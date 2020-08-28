@@ -6,3 +6,17 @@
   border-radius: 10px;
   text-align: left;
 }
+
+.btn_link_create {
+  width: 280px;
+  height: 100px;
+  margin-top: 114px;
+  font-size: 28px;
+  font-weight: 1000;
+  color: white;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(9, 187, 254, 0.76) 0%,
+    rgba(80, 70, 237, 0.719) 100%
+  );
+}

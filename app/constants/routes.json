@@ -3,6 +3,7 @@
   "JOIN": "/join",
   "COUNTER": "/counter",
   "CALCULATOR": "/calc",
+  "CREATESTORE": "/createstore",
   "SELECTSTORE": "/selectstore",
   "CKS": "/cks",
   "W_SR": "/w_sr"
