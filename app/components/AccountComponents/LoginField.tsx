@@ -12,7 +12,6 @@ import {
   checkUserInfo,
   checkUserStore
 } from '../../apis/accountApi';
-import { cpuUsage } from 'process';
 
 const LoginField = () => {
   const history = useHistory();

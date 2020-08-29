@@ -5,9 +5,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.css';
 import routes from '../../constants/routes.json';
-// 엘리버드 로고 가져오기
-// @ts-ignore
-import imgSetting from '../../../resources/inappIcon/settings@2x.png';
 
 // 헤더 컴포넌트
 const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {

@@ -5,7 +5,7 @@ import styles from './Calculator.css';
 export default function Calculator() {
   return (
     <div>
-      <Header />
+      <Header store_name={localStorage.getItem('store_name') as string} />
       <form>
         <div id={styles.ItemList_Box}>
           안에 아이템 리스트를 불러올 함수가 작동

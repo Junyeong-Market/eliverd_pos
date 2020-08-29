@@ -61,6 +61,7 @@ const checkUserStore = async () => {
       }
     }
   );
+  localStorage.setItem('select_stores', JSON.stringify(response.data.results));
   return response.data;
 };
 
