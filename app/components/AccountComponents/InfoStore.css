@@ -9,7 +9,6 @@
 
 .btn_create {
   position: relative;
-  bottom: 20px;
   left: 640px;
   width: 120px;
   height: 40px;
@@ -41,6 +40,16 @@
 input {
   margin-top: 10px;
   height: 20px;
+}
+
+.address_label {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.address {
+  width: 173px;
 }
 
 .location {

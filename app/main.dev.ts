@@ -27,6 +27,19 @@ export default class AppUpdater {
 let mainWindow: BrowserWindow | null = null;
 let childWindow: BrowserWindow | null = null;
 
+// TODO- 일단 이거 할 때가 아닌듯하다..
+const removeLocalStorage = () => {
+  localStorage.removeItem('session');
+  localStorage.removeItem('pid');
+  localStorage.removeItem('user_id');
+  localStorage.removeItem('nickname');
+  localStorage.removeItem('realname');
+  // localStorage.removeItem('is_seller');
+  localStorage.removeItem('select_stores');
+  localStorage.removeItem('store_name');
+  localStorage.removeItem('store_id');
+};
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -178,6 +191,6 @@ ipcMain.on('openGoogleMaps', (event, arg) => {
   sender = event.sender;
 });
 
-ipcMain.on('sendPositionData', (event, arg1, arg2) => {
-  sender.send('setLatLng', arg1, arg2);
+ipcMain.on('sendPositionData', (event, arg1, arg2, arg3) => {
+  sender.send('setLatLng', arg1, arg2, arg3);
 });

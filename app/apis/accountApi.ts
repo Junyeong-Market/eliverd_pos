@@ -44,7 +44,7 @@ const checkUserInfo = async () => {
   localStorage.setItem('user_id', response.data.user_id);
   localStorage.setItem('nickname', response.data.nickname);
   localStorage.setItem('realname', response.data.realname);
-  localStorage.setItem('is_seller', response.data.is_seller);
+  // localStorage.setItem('is_seller', response.data.is_seller);
 };
 
 // 권한있는 상점 조회

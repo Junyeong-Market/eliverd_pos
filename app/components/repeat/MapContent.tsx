@@ -66,7 +66,6 @@ const MapContent = () => {
                 const resp = await Alert(
                   ['확인', '취소'],
                   `${results[0].formatted_address}
-위도: ${_marker.getPosition().lat()}, 경도: ${_marker.getPosition().lng()}
 가 맞습니까?`,
                   '장소 확인'
                 );
@@ -74,7 +73,8 @@ const MapContent = () => {
                   ipcRenderer.send(
                     'sendPositionData',
                     _marker.getPosition().lat(),
-                    _marker.getPosition().lng()
+                    _marker.getPosition().lng(),
+                    results[0].formatted_address
                   );
               } else {
                 window.alert('No results found');

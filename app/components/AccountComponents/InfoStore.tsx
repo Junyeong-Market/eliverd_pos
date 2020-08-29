@@ -30,9 +30,10 @@ const InfoStore = ({ parentFunc }) => {
     ipcRenderer.send('openGoogleMaps');
   };
 
-  ipcRenderer.on('setLatLng', (event, arg1, arg2) => {
+  ipcRenderer.on('setLatLng', (event, arg1, arg2, arg3) => {
     (document.getElementById('lat') as HTMLInputElement).value = arg1;
     (document.getElementById('lng') as HTMLInputElement).value = arg2;
+    (document.getElementById('address') as HTMLInputElement).value = arg3;
   });
 
   // @ts-ignore
@@ -75,32 +76,39 @@ const InfoStore = ({ parentFunc }) => {
         <br />
         <input
           type="button"
-          value="위도 및 경도"
+          value="주소찾기"
           className={styles.btn_fl}
           onClick={showSelectRegisterer}
         />
         <br />
-        <label className={styles.location_label}>
-          위도{' '}
-          <input
-            type="text"
-            id="lat"
-            className={styles.location}
-            defaultValue={0}
+        <label className={styles.address_label}>
+          주소
+          <br />
+          <textarea
+            id="address"
+            rows={3}
+            className={styles.address}
+            defaultValue="위의 버튼으로 입력해주세요."
             disabled
           />
         </label>
+        <input
+          type="text"
+          id="lat"
+          className={styles.location}
+          defaultValue={0}
+          hidden
+          disabled
+        />
         <br />
-        <label className={styles.location_label}>
-          경도{' '}
-          <input
-            type="text"
-            id="lng"
-            className={styles.location}
-            defaultValue={0}
-            disabled
-          />
-        </label>
+        <input
+          type="text"
+          id="lng"
+          className={styles.location}
+          defaultValue={0}
+          hidden
+          disabled
+        />
         <br />
         <input type="submit" value="생성" className={styles.btn_create} />
       </form>
