@@ -18,6 +18,11 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {
     return (
       <div className={styles.header}>
         <span className={styles.header_text}>{store_name}</span>
+        <span className={styles.name_space}>
+          {'nickname' in localStorage
+            ? `${localStorage.getItem('nickname')}님이 로그인 중입니다.`
+            : ''}
+        </span>
       </div>
     );
   }
@@ -38,6 +43,11 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {
           <div className={styles.btn_link_font}>설정</div>
         </Link>
       </div>
+      <span className={styles.name_space}>
+        {'nickname' in localStorage
+          ? `${localStorage.getItem('nickname')}님이 로그인 중입니다.`
+          : ''}
+      </span>
     </div>
   );
 };

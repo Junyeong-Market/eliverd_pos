@@ -5,7 +5,6 @@ import { LoginField } from './AccountComponents';
 
 // eslint-disable-next-line react/prop-types
 export default function Home() {
-  console.log(localStorage.getItem('session'));
   return (
     <div>
       <Header nav={false} />

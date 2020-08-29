@@ -23,16 +23,15 @@
 
 #link_area {
   position: absolute;
-  left: calc(100vw - 352px);
+  right: 10px;
   display: flex;
   justify-content: flex-end;
 }
 
-.btn_Setting {
+.name_space {
   position: absolute;
-  left: calc(100vw - 48px);
-  width: 40px;
-  height: 40px;
+  right: 10px;
+  top: 55px;
 }
 
 .btn_link {
@@ -44,7 +43,7 @@
   text-align: center;
   border-radius: 0px;
   background-color: #009ad5;
-  margin-right: 8px;
+  margin-left: 8px;
 }
 
 .btn_link_font {
@@ -68,5 +67,5 @@
   text-align: center;
   border-radius: 10px;
   background-color: #77daff;
-  margin-right: 8px;
+  margin-left: 8px;
 }
