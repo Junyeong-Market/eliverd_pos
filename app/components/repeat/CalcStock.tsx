@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import styles from './CalcStock.css';
 
-const CalcStock = ({ data }) => {
+const CalcStock = ({ data, calcPrice, deselectStock }) => {
   const [count, setCount] = useState(1);
 
   const increaseCount = () => {
     setCount(count + 1);
+    // TODO-총 가격에 자신의 가격을 더한다.
+    calcPrice(data.price as number);
   };
 
   const decreaseCount = () => {
-    setCount(count - 1);
+    if (count !== 1) {
+      // TODO- 총 가격에 자신의 가격을 제한다.
+      calcPrice(-1 * (data.price as number));
+      setCount(count - 1);
+    } else {
+      // TODO- 총 가격에 자신의 가격을 제한다.
+      calcPrice(-1 * (data.price as number));
+      // TODO-제거.
+      deselectStock(data);
+    }
   };
 
   return (
@@ -34,7 +45,7 @@ const CalcStock = ({ data }) => {
           <i className="fa fa-plus" />
         </button>
       </span>
-      <span className={styles.stock_price}>{data.price}원</span>
+      <span className={styles.stock_price}>{data.price * count}원</span>
     </div>
   );
 };

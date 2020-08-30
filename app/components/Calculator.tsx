@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-indent */
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/alt-text */
@@ -14,6 +17,45 @@ export default function Calculator() {
     selectedStocks: [{}],
     finalPrice: 0
   });
+
+  const clickStock = data => {
+    let temp = state.selectedStocks;
+    if (_.isEmpty(temp[0])) {
+      temp = [data];
+      setState(prevState => ({
+        ...prevState,
+        finalPrice: state.finalPrice + data.price,
+        selectedStocks: temp
+      }));
+    } else if (temp.findIndex(i => i.product.id === data.product.id) === -1) {
+      temp.push(data);
+      setState(prevState => ({
+        ...prevState,
+        finalPrice: state.finalPrice + data.price,
+        selectedStocks: temp
+      }));
+    }
+  };
+
+  const calcFinalPrice = (value: number) => {
+    setState(prevState => ({
+      ...prevState,
+      finalPrice: state.finalPrice + value
+    }));
+  };
+
+  const destroySelStock = data => {
+    let temp = state.selectedStocks;
+    temp.splice(
+      temp.findIndex(i => i.product.id === data.product.id),
+      1
+    );
+    if (temp.length === 0) temp = [{}];
+    setState(prevState => ({
+      ...prevState,
+      selectedStocks: temp
+    }));
+  };
 
   useEffect(() => {
     const page = 1;
@@ -39,21 +81,32 @@ export default function Calculator() {
           <div>
             {Object.keys(state.stocks[0]).length !== 0
               ? state.stocks.map(value => (
-                  <div key={value.id} className={styles.stock}>
+                  <div
+                    key={value.id}
+                    className={styles.stock}
+                    onClick={() => {
+                      clickStock(value);
+                    }}
+                  >
                     <img src={dummyImage} className={styles.stock_img} />
                     <br />
                     <span>{value.product.name}</span>
                   </div>
                 ))
-              : `안에 아이템 리스트를 불러올 함수가 작동`}
+              : ``}
           </div>
         </div>
         <div id={styles.AddedItemList_Box}>
-          {Object.keys(state.stocks[0]).length !== 0
-            ? state.stocks.map(value => (
-                <CalcStock key={value.product.id} data={value} />
+          {Object.keys(state.selectedStocks[0]).length !== 0
+            ? state.selectedStocks.map(value => (
+                <CalcStock
+                  key={value.product.id}
+                  data={value}
+                  calcPrice={calcFinalPrice}
+                  deselectStock={destroySelStock}
+                />
               ))
-            : `안에 아이템 리스트를 불러올 함수가 작동`}
+            : ``}
         </div>
         <div id={styles.ResultCost_Box}>{state.finalPrice}원</div>
         <div id={styles.Btn_Box}>
