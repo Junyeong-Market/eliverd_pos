@@ -1,10 +1,16 @@
 #ItemList_Box {
   float: left;
+  display: flex;
+  text-align: left;
+  flex-wrap: wrap;
+  flex-direction: row;
   width: 60vw;
   height: calc(100vh - 120px);
   margin: 32px;
   border: solid 1.5px #707070;
   background-color: #dddddd;
+  overflow-y: hidden;
+  resize: none;
 }
 
 #AddedItemList_Box {
@@ -16,10 +22,14 @@
   margin-top: 32px;
   border: solid 1.5px #707070;
   background-color: #dddddd;
+  overflow-y: hidden;
+  resize: none;
 }
 
 #ResultCost_Box {
   float: right;
+  text-align: right;
+  font-size: 32px;
   margin-right: 32px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -37,7 +47,7 @@
 
 .btn_font {
   font-family: NotoSansCJKkr;
-  font-size: 32px;
+  font-size: 28px;
   text-align: center;
   color: #4d4d4d;
 }
@@ -45,10 +55,25 @@
 .btn_reset {
   margin-right: 2vw;
   width: calc(calc(38vw - 102px) / 2);
-  height: 50px;
+  height: 40px;
 }
 
 .btn_submit {
   width: calc(calc(38vw - 102px) / 2);
-  height: 50px;
+  height: 40px;
+}
+
+.stock {
+  width: 120px;
+  display: inline-block;
+  font-weight: 1000;
+  margin: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.stock_img {
+  width: 120px;
+  flex: 1;
 }

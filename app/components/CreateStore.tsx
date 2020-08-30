@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Header } from './repeat';
 import { SearchRegisterer, InfoStore } from './AccountComponents';
 import styles from './CreateStore.css';
-import createStore from '../apis/storeApi';
+import { createStore } from '../apis/storeApi';
 import routes from '../constants/routes.json';
 import Alert from './repeat/Alert';
 

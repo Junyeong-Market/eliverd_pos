@@ -7,7 +7,7 @@ import styles from './Header.css';
 import routes from '../../constants/routes.json';
 
 // 헤더 컴포넌트
-const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {
+const Header = ({ nav = true, store_name = 'Eliverd_Pos', btnPage = '' }) => {
   if ('user_id' in localStorage) {
     console.log(localStorage.getItem('user_id'));
   } else {
@@ -30,16 +30,36 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos' }) => {
     <div className={styles.header}>
       <span className={styles.header_text}>{store_name}</span>
       <div id={styles.link_area}>
-        <Link to={routes.CALCULATOR} className={styles.btn_link}>
+        <Link
+          to={routes.CALCULATOR}
+          className={
+            btnPage === '계산' ? styles.btn_link_pressed : styles.btn_link
+          }
+        >
           <div className={styles.btn_link_font}>계산</div>
         </Link>
-        <Link to={routes.COUNTER} className={styles.btn_link}>
+        <Link
+          to={routes.COUNTER}
+          className={
+            btnPage === '재고' ? styles.btn_link_pressed : styles.btn_link
+          }
+        >
           <div className={styles.btn_link_font}>재고</div>
         </Link>
-        <Link to={routes.SELECTSTORE} className={styles.btn_link}>
+        <Link
+          to={routes.SELECTSTORE}
+          className={
+            btnPage === '주문' ? styles.btn_link_pressed : styles.btn_link
+          }
+        >
           <div className={styles.btn_link_font}>주문</div>
         </Link>
-        <Link to={routes.CKS} className={styles.btn_link}>
+        <Link
+          to={routes.CKS}
+          className={
+            btnPage === '설정' ? styles.btn_link_pressed : styles.btn_link
+          }
+        >
           <div className={styles.btn_link_font}>설정</div>
         </Link>
       </div>

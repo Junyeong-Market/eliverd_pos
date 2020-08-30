@@ -43,8 +43,8 @@ const InfoStore = ({ parentFunc }) => {
       name: event.target[0].value,
       desc: event.target[1].value,
       reginum: event.target[2].value,
-      lat: event.target[4].value,
-      lng: event.target[5].value
+      lat: event.target[5].value,
+      lng: event.target[6].value
     };
     sendDataToParent(data);
     return false;

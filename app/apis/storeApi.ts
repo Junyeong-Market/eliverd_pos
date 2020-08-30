@@ -28,4 +28,88 @@ const createStore = async (regis: [], info) => {
   return data;
 };
 
-export default createStore;
+// 상점 정보 조회
+const referStoreInfo = async storeId => {
+  const response = await axios.get(`http://donote.co:8000/store/${storeId}/`, {
+    headers: {
+      Authorization: localStorage.getItem('session')
+    }
+  });
+  console.log(response);
+};
+
+// 상점 재고 목록 조회
+const referStoreStocks = async (page: number) => {
+  const response = await axios.get(
+    `http://donote.co:8000/store/${1}/stocks/?page=${page}`,
+    {
+      headers: {
+        Authorization: localStorage.getItem('session')
+      }
+    }
+  );
+  if (response.data.count === 0) return [{}];
+  const { results } = await response.data;
+  return results;
+};
+
+// 상점 재고 목록 조회
+const referStoreStocksWithQuery = async (
+  category: string,
+  sName: string,
+  orderBy: string,
+  page: number
+) => {
+  const response = await axios.get(
+    `http://donote.co:8000/store/${localStorage.getItem(
+      'store_id'
+    )}/stocks/?page=${page}&category=${category}&name=${sName}&order_by=${orderBy}`,
+    {
+      headers: {
+        Authorization: localStorage.getItem('session')
+      }
+    }
+  );
+  console.log(response);
+};
+
+// 상점 재고 수정
+const changeStoreStocks = async (
+  storeId: string,
+  sIan: string,
+  sPrice: number,
+  sAmount: number
+) => {
+  const response = await axios.post(
+    `http://donote.co:8000/store/${storeId}/stocks/`,
+    {
+      ian: sIan,
+      price: sPrice,
+      amount: sAmount
+    },
+    {
+      headers: {
+        Authorization: localStorage.getItem('session')
+      }
+    }
+  );
+  console.log(response);
+};
+
+// 상점 별 주문 내역 조회
+const referStoreOrders = async storeId => {
+  const page = 1;
+  const response = await axios.get(
+    `http://donote.co:8000/store/${storeId}/orders/?page=${page}`
+  );
+  console.log(response);
+};
+
+export {
+  createStore,
+  referStoreInfo,
+  referStoreStocks,
+  referStoreStocksWithQuery,
+  changeStoreStocks,
+  referStoreOrders
+};

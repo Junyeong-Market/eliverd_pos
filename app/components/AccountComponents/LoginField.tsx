@@ -75,10 +75,10 @@ const LoginField = () => {
           </label>
         </div>
         <div className={styles.chk_area}>
-          <input type="checkbox" className={styles.chk_option} />
+          {/* <input type="checkbox" className={styles.chk_option} />
           자동로그인&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="checkbox" className={styles.chk_option} />
-          아이디 저장
+          아이디 저장 */}
         </div>
         <input
           type="submit"

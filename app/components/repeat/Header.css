@@ -59,13 +59,21 @@
 }
 
 .btn_link:hover {
+  border-radius: 10px;
+  background-color: #77daff;
+}
+
+.btn_link_pressed {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80px;
   height: 32px;
   text-align: center;
-  border-radius: 10px;
   background-color: #77daff;
   margin-left: 8px;
+}
+
+.btn_link_pressed:hover {
+  border-radius: 10px;
 }

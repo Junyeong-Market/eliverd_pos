@@ -1,0 +1,38 @@
+.stock_wrapper {
+  width: calc(40vw - 132px);
+  height: 30px;
+  margin: 8px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  border: solid 0.8px #707070;
+  background-color: #dddddd;
+  text-align: left;
+  padding: 0px 5px;
+}
+
+.stock_name {
+  float: left;
+  width: calc(calc(40vw - 132px) * 0.48);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.stock_price {
+  float: right;
+}
+
+.btn {
+  font-size: 10px;
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  cursor: pointer;
+  font-family: Arial, Helvetica, Helvetica Neue, sans-serif;
+}
+
+.order_counts {
+}
