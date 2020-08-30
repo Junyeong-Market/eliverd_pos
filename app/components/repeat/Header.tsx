@@ -8,11 +8,6 @@ import routes from '../../constants/routes.json';
 
 // 헤더 컴포넌트
 const Header = ({ nav = true, store_name = 'Eliverd_Pos', btnPage = '' }) => {
-  if ('user_id' in localStorage) {
-    console.log(localStorage.getItem('user_id'));
-  } else {
-    console.log('음슴');
-  }
   // 내비게이션이 없다면
   if (!nav) {
     return (

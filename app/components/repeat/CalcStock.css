@@ -1,7 +1,8 @@
 .stock_wrapper {
-  width: calc(40vw - 132px);
+  width: calc(40vw - 140px);
   height: 30px;
   margin: 8px;
+  margin-right: 12px;
   margin-bottom: 0px;
   border-radius: 10px;
   border: solid 0.8px #707070;

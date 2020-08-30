@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-indent */
@@ -20,7 +21,8 @@ export default function Calculator() {
     stocks: [{}],
     selectedStocks: [{}],
     finalPrice: 0,
-    isProcess: false
+    isProcess: false,
+    url: ''
   });
 
   const clickStock = data => {
@@ -85,7 +87,12 @@ export default function Calculator() {
       });
     });
     const data = await createOrder(packData);
-    history.push(routes.PURCHASECOMPLETE);
+    setState(prevState => ({
+      ...prevState,
+      isProcess: true,
+      url: data.next_redirect_pc_url
+    }));
+    // history.push(routes.PURCHASECOMPLETE);
     // 셋 스테이트 이즈 프로세스 트루
     // 데이터는 그냥 전역으로? 아니 스테이트로 보내자 얘도
     // 시발 머리아파. 데이터 내의 URL으로 보내고 어쩌지. 그럼 일단 여기서 끊자.
@@ -94,6 +101,10 @@ export default function Calculator() {
   };
 
   useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.setAttribute('http-equiv', 'X-Frame-Options');
+    meta.setAttribute('content', 'deny');
+    document.getElementsByTagName('head')[0].appendChild(meta);
     const page = 1;
     const didMount = async () => {
       const response = await referStoreStocks(page);
@@ -112,23 +123,27 @@ export default function Calculator() {
         btnPage="계산"
       />
       <div id={styles.ItemList_Box}>
-        <div>
-          {Object.keys(state.stocks[0]).length !== 0
-            ? state.stocks.map(value => (
-                <div
-                  key={value.id}
-                  className={styles.stock}
-                  onClick={() => {
-                    clickStock(value);
-                  }}
-                >
-                  <img src={dummyImage} className={styles.stock_img} />
-                  <br />
-                  <span>{value.product.name}</span>
-                </div>
-              ))
-            : ``}
-        </div>
+        {state.isProcess ? (
+          <iframe src={state.url} id={styles.PurchaseIFrame} />
+        ) : (
+          <div>
+            {Object.keys(state.stocks[0]).length !== 0
+              ? state.stocks.map(value => (
+                  <div
+                    key={value.id}
+                    className={styles.stock}
+                    onClick={() => {
+                      clickStock(value);
+                    }}
+                  >
+                    <img src={dummyImage} className={styles.stock_img} />
+                    <br />
+                    <span>{value.product.name}</span>
+                  </div>
+                ))
+              : ``}
+          </div>
+        )}
       </div>
       <div id={styles.AddedItemList_Box}>
         {Object.keys(state.selectedStocks[0]).length !== 0

@@ -25,6 +25,16 @@
   resize: none;
 }
 
+#PurchaseIFrame {
+  float: left;
+  display: flex;
+  text-align: left;
+  width: 60vw;
+  height: calc(100vh - 120px);
+  margin: 32px;
+  border: solid 1.5px #707070;
+}
+
 #ResultCost_Box {
   float: right;
   text-align: right;

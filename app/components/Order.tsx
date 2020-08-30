@@ -13,13 +13,16 @@ import { referStoreOrders } from '../apis/storeApi';
 
 // eslint-disable-next-line react/prop-types
 export default function Order() {
+  const [orders, setOrders] = useState([{}]);
+
   useEffect(() => {
     const didmount = async () => {
-      await referStoreOrders();
+      const response = await referStoreOrders();
+      setOrders(response);
     };
 
     didmount();
-  });
+  }, []);
   return (
     <div>
       <Header btnPage="주문" />
@@ -27,21 +30,9 @@ export default function Order() {
         id={styles.select_store_container}
         style={{ overflowY: 'scroll', resize: 'none' }}
       >
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
-        <OrderElement data={'뭐'} />
+        {Object.keys(orders[0]).length !== 0
+          ? orders.map(value => <OrderElement data={value} />)
+          : '주문이 입력될 곳입니다.'}
       </div>
     </div>
   );

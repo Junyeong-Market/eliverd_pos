@@ -103,7 +103,8 @@ const referStoreOrders = async () => {
     `http://donote.co:8000/store/${1}/orders/?page=${page}`
   );
   console.log(response);
-  return response.data;
+  if (response.data.count === 0) return [{}];
+  return response.data.results;
 };
 
 export {

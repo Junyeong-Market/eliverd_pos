@@ -14,7 +14,15 @@ const OrderElement = ({ data }) => {
         textAlign: 'left'
       }}
     >
-      아 미치겠네
+      <div>
+        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>주문</div>
+        {data.stocks.map(val => (
+          <span>
+            {' '}
+            {val.stock.product.name}X{val.amount} {'/'}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
