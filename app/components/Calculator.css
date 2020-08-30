@@ -8,7 +8,7 @@
   height: calc(100vh - 120px);
   margin: 32px;
   border: solid 1.5px #707070;
-  overflow-y: hidden;
+  overflow-y: scroll;
   resize: none;
 }
 
@@ -20,7 +20,8 @@
   margin-right: 32px;
   margin-top: 32px;
   border: solid 1.5px #707070;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   resize: none;
 }
 

@@ -30,7 +30,6 @@ const logout = async () => {
     }
   });
   localStorage.clear();
-  console.log('로컬 스토리지 클리어');
 };
 
 // 세션 정보 조회(GET)

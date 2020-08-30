@@ -97,12 +97,13 @@ const changeStoreStocks = async (
 };
 
 // 상점 별 주문 내역 조회
-const referStoreOrders = async storeId => {
+const referStoreOrders = async () => {
   const page = 1;
   const response = await axios.get(
-    `http://donote.co:8000/store/${storeId}/orders/?page=${page}`
+    `http://donote.co:8000/store/${1}/orders/?page=${page}`
   );
   console.log(response);
+  return response.data;
 };
 
 export {
