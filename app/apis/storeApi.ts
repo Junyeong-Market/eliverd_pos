@@ -53,7 +53,7 @@ const referStoreStocks = async (page: number) => {
   return results;
 };
 
-// 상점 재고 목록 조회
+// 상점 재고 목록 조회 쿼리와 함께
 const referStoreStocksWithQuery = async (
   category: string,
   sName: string,

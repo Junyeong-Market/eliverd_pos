@@ -39,7 +39,7 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos', btnPage = '' }) => {
           <div className={styles.btn_link_font}>계산</div>
         </Link>
         <Link
-          to={routes.COUNTER}
+          to={routes.STOCKMANAGE}
           className={
             btnPage === '재고' ? styles.btn_link_pressed : styles.btn_link
           }
@@ -47,7 +47,7 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos', btnPage = '' }) => {
           <div className={styles.btn_link_font}>재고</div>
         </Link>
         <Link
-          to={routes.SELECTSTORE}
+          to={routes.ORDER}
           className={
             btnPage === '주문' ? styles.btn_link_pressed : styles.btn_link
           }
@@ -55,7 +55,7 @@ const Header = ({ nav = true, store_name = 'Eliverd_Pos', btnPage = '' }) => {
           <div className={styles.btn_link_font}>주문</div>
         </Link>
         <Link
-          to={routes.CKS}
+          to={routes.SETTING}
           className={
             btnPage === '설정' ? styles.btn_link_pressed : styles.btn_link
           }

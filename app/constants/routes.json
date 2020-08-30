@@ -5,6 +5,10 @@
   "CALCULATOR": "/calc",
   "CREATESTORE": "/createstore",
   "SELECTSTORE": "/selectstore",
+  "PURCHASECOMPLETE": "/purcomp",
+  "STOCKMANAGE": "/stockmanage",
+  "ORDER": "/order",
+  "SETTING": "/setting",
   "CKS": "/cks",
   "W_SR": "/w_sr"
 }
