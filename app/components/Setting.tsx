@@ -12,7 +12,6 @@ import { Header } from './repeat';
 import styles from './SelectStore.css';
 import routes from '../constants/routes.json';
 import { logout } from '../apis/accountApi';
-
 // eslint-disable-next-line react/prop-types
 export default function Setting() {
   const history = useHistory();
@@ -22,12 +21,15 @@ export default function Setting() {
     // Home화면 가기.
     history.push(routes.HOME);
   };
-
+  console.log(process.env.MY_FIRST_NAME);
   return (
     <div>
-      <Header btnPage="설정" />
+      <Header
+        btnPage="설정"
+        store_name={localStorage.getItem('store_name') as string}
+      />
       <div id={styles.select_store_container}>
-        <h2>설정은 현재 구현중입니다.</h2>
+        <h2>{process.env.MY_FIRST_NAME}</h2>
         <button
           style={{
             width: '280px',

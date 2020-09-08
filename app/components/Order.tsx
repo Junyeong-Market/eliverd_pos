@@ -25,14 +25,17 @@ export default function Order() {
   }, []);
   return (
     <div>
-      <Header btnPage="주문" />
+      <Header
+        btnPage="주문"
+        store_name={localStorage.getItem('store_name') as string}
+      />
       <div
         id={styles.select_store_container}
         style={{ overflowY: 'scroll', resize: 'none' }}
       >
         {Object.keys(orders[0]).length !== 0
           ? orders.map(value => <OrderElement data={value} />)
-          : '주문이 입력될 곳입니다.'}
+          : '주문이 기록될 곳입니다.'}
       </div>
     </div>
   );

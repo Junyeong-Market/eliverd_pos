@@ -8,11 +8,16 @@
  * When running `yarn build` or `yarn build-main`, this file is compiled to
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  */
+
+// TODO- 아니 시발 진짜로 이거 계산하는 곳을 새로운 browserWindow를 통해서 만들자는 의견이 나와버렸습니다!!
+// TODO- loadURL에다가 저거 적으면 되지 않을까라고 생각중입니다.
 import path from 'path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+
+require('dotenv').config();
 
 const url = require('url');
 
@@ -26,19 +31,6 @@ export default class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 let childWindow: BrowserWindow | null = null;
-
-// TODO- 일단 이거 할 때가 아닌듯하다..
-const removeLocalStorage = () => {
-  localStorage.removeItem('session');
-  localStorage.removeItem('pid');
-  localStorage.removeItem('user_id');
-  localStorage.removeItem('nickname');
-  localStorage.removeItem('realname');
-  // localStorage.removeItem('is_seller');
-  localStorage.removeItem('select_stores');
-  localStorage.removeItem('store_name');
-  localStorage.removeItem('store_id');
-};
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -78,14 +70,10 @@ const createWindow = async () => {
     minWidth: 1280,
     minHeight: 720,
     icon: path.join(__dirname, '../resources/icons/64x64.png'),
-    webPreferences:
-      process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true'
-        ? {
-            nodeIntegration: true
-          }
-        : {
-            nodeIntegration: true
-          }
+    webPreferences: {
+      nodeIntegration: true,
+      webSecurity: false
+    }
   });
   mainWindow.setMenuBarVisibility(false);
 

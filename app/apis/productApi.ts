@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios';
-import Alert from '../components/repeat/Alert';
 
 // 상점 주문 생성
 const createOrder = async purchaseStocks => {

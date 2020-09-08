@@ -15,6 +15,8 @@ import routes from '../constants/routes.json';
 import { referStoreStocks } from '../apis/storeApi';
 import { createOrder } from '../apis/productApi';
 
+let iframe: HTMLIFrameElement | null;
+
 export default function Calculator() {
   const history = useHistory();
   const [state, setState] = useState({
@@ -24,6 +26,12 @@ export default function Calculator() {
     isProcess: false,
     url: ''
   });
+
+  const onLoadFunction = () => {
+    console.log('abc');
+    console.log(iframe?.contentWindow?.location.href);
+    // TODO- 주문정보 조회를 통해 status 확인 후 fail, success 구별하여 처리
+  };
 
   const clickStock = data => {
     let temp = state.selectedStocks;
@@ -92,19 +100,11 @@ export default function Calculator() {
       isProcess: true,
       url: data.next_redirect_pc_url
     }));
+    console.log(data.next_redirect_pc_url);
     // history.push(routes.PURCHASECOMPLETE);
-    // 셋 스테이트 이즈 프로세스 트루
-    // 데이터는 그냥 전역으로? 아니 스테이트로 보내자 얘도
-    // 시발 머리아파. 데이터 내의 URL으로 보내고 어쩌지. 그럼 일단 여기서 끊자.
-    // 이만큼 했으면 결제는 됬다.
-    // 결제완료 페이지 만들고. 계산으로 돌아가기랑 아 재고
   };
 
   useEffect(() => {
-    const meta = document.createElement('meta');
-    meta.setAttribute('http-equiv', 'X-Frame-Options');
-    meta.setAttribute('content', 'deny');
-    document.getElementsByTagName('head')[0].appendChild(meta);
     const page = 1;
     const didMount = async () => {
       const response = await referStoreStocks(page);
@@ -122,9 +122,21 @@ export default function Calculator() {
         store_name={localStorage.getItem('store_name') as string}
         btnPage="계산"
       />
-      <div id={styles.ItemList_Box}>
+      <div
+        id={styles.ItemList_Box}
+        style={
+          state.isProcess ? { overflowY: 'hidden' } : { overflowY: 'scroll' }
+        }
+      >
         {state.isProcess ? (
-          <iframe src={state.url} id={styles.PurchaseIFrame} />
+          <iframe
+            src={state.url}
+            id={styles.PurchaseIFrame}
+            onLoad={onLoadFunction}
+            ref={ref => {
+              iframe = ref;
+            }}
+          />
         ) : (
           <div>
             {Object.keys(state.stocks[0]).length !== 0

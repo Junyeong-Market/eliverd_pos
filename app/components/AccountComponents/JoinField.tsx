@@ -49,7 +49,7 @@ const JoinField = () => {
         </div>
         <div className={styles.input_area}>
           <label className={styles.label_font}>
-            실명
+            *실명
             <input
               type="text"
               name="realname"

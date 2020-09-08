@@ -27,6 +27,7 @@ export default function StockManager() {
     didMount();
   }, []);
 
+  // form 에서 리스트로 enum같이 만들고
   return (
     <div>
       <Header
@@ -46,7 +47,7 @@ export default function StockManager() {
             : ``}
         </div>
       </div>
-      <div id={styles.AddedItemList_Box}>아마도 뭐가 들어갈까요?</div>
+      <div id={styles.AddedItemList_Box}>미완성입니다.</div>
       <div id={styles.Btn_Box}>
         <input
           type="button"

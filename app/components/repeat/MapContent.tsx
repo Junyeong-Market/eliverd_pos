@@ -11,13 +11,10 @@
 
 import React, { useEffect } from 'react';
 import styles from './MapContent.css';
-import _apikey from '../../constants/apikey.json';
 import Alert from './Alert';
 
 const electron = window.require('electron');
 const { ipcRenderer } = electron;
-
-const apikey = _apikey.GOOGLE;
 
 let map: google.maps.Map;
 let clicked_markers: google.maps.Marker[] = [];
@@ -34,7 +31,7 @@ const MapContent = () => {
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apikey}&callback=initMap&libraries=places&v=weekly`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_KEY}&callback=initMap&libraries=places&v=weekly`;
     script.defer = true;
     document.head.appendChild(script);
 

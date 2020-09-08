@@ -41,7 +41,9 @@ const referStoreInfo = async storeId => {
 // 상점 재고 목록 조회
 const referStoreStocks = async (page: number) => {
   const response = await axios.get(
-    `http://donote.co:8000/store/${1}/stocks/?page=${page}`,
+    `http://donote.co:8000/store/${localStorage.getItem(
+      'store_id'
+    )}/stocks/?page=${page}`,
     {
       headers: {
         Authorization: localStorage.getItem('session')
@@ -100,7 +102,9 @@ const changeStoreStocks = async (
 const referStoreOrders = async () => {
   const page = 1;
   const response = await axios.get(
-    `http://donote.co:8000/store/${1}/orders/?page=${page}`
+    `http://donote.co:8000/store/${localStorage.getItem(
+      'store_id'
+    )}/orders/?page=${page}`
   );
   console.log(response);
   if (response.data.count === 0) return [{}];
