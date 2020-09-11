@@ -15,7 +15,8 @@ import routes from '../constants/routes.json';
 import { referStoreStocks } from '../apis/storeApi';
 import { createOrder } from '../apis/productApi';
 
-let iframe: HTMLIFrameElement | null;
+const electron = window.require('electron');
+const { ipcRenderer } = electron;
 
 export default function Calculator() {
   const history = useHistory();
@@ -23,15 +24,8 @@ export default function Calculator() {
     stocks: [{}],
     selectedStocks: [{}],
     finalPrice: 0,
-    isProcess: false,
     url: ''
   });
-
-  const onLoadFunction = () => {
-    console.log('abc');
-    console.log(iframe?.contentWindow?.location.href);
-    // TODO- 주문정보 조회를 통해 status 확인 후 fail, success 구별하여 처리
-  };
 
   const clickStock = data => {
     let temp = state.selectedStocks;
@@ -86,6 +80,14 @@ export default function Calculator() {
     }));
   };
 
+  ipcRenderer.on('returnCancel', (e, arg) => {
+    console.log(arg);
+  });
+
+  ipcRenderer.on('returnSuccess', (e, arg) => {
+    console.log(arg);
+  });
+
   const purchaseProcess = async () => {
     let packData = [];
     state.selectedStocks.map(value => {
@@ -97,9 +99,9 @@ export default function Calculator() {
     const data = await createOrder(packData);
     setState(prevState => ({
       ...prevState,
-      isProcess: true,
       url: data.next_redirect_pc_url
     }));
+    ipcRenderer.send('openKakaoPay', data.next_redirect_pc_url);
     console.log(data.next_redirect_pc_url);
     // history.push(routes.PURCHASECOMPLETE);
   };
@@ -122,40 +124,24 @@ export default function Calculator() {
         store_name={localStorage.getItem('store_name') as string}
         btnPage="계산"
       />
-      <div
-        id={styles.ItemList_Box}
-        style={
-          state.isProcess ? { overflowY: 'hidden' } : { overflowY: 'scroll' }
-        }
-      >
-        {state.isProcess ? (
-          <iframe
-            src={state.url}
-            id={styles.PurchaseIFrame}
-            onLoad={onLoadFunction}
-            ref={ref => {
-              iframe = ref;
-            }}
-          />
-        ) : (
-          <div>
-            {Object.keys(state.stocks[0]).length !== 0
-              ? state.stocks.map(value => (
-                  <div
-                    key={value.id}
-                    className={styles.stock}
-                    onClick={() => {
-                      clickStock(value);
-                    }}
-                  >
-                    <img src={dummyImage} className={styles.stock_img} />
-                    <br />
-                    <span>{value.product.name}</span>
-                  </div>
-                ))
-              : ``}
-          </div>
-        )}
+      <div id={styles.ItemList_Box}>
+        <div>
+          {Object.keys(state.stocks[0]).length !== 0
+            ? state.stocks.map(value => (
+                <div
+                  key={value.id}
+                  className={styles.stock}
+                  onClick={() => {
+                    clickStock(value);
+                  }}
+                >
+                  <img src={dummyImage} className={styles.stock_img} />
+                  <br />
+                  <span>{value.product.name}</span>
+                </div>
+              ))
+            : ``}
+        </div>
       </div>
       <div id={styles.AddedItemList_Box}>
         {Object.keys(state.selectedStocks[0]).length !== 0

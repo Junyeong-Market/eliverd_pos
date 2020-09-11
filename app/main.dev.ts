@@ -8,9 +8,6 @@
  * When running `yarn build` or `yarn build-main`, this file is compiled to
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  */
-
-// TODO- 아니 시발 진짜로 이거 계산하는 곳을 새로운 browserWindow를 통해서 만들자는 의견이 나와버렸습니다!!
-// TODO- loadURL에다가 저거 적으면 되지 않을까라고 생각중입니다.
 import path from 'path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
@@ -30,7 +27,8 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
-let childWindow: BrowserWindow | null = null;
+let mapWindow: BrowserWindow | null = null;
+let payWindow: BrowserWindow | null = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -104,7 +102,7 @@ const createWindow = async () => {
   });
 
   // #region 차일드 윈도우 하나 만들어봤다
-  childWindow = new BrowserWindow({
+  mapWindow = new BrowserWindow({
     parent: mainWindow,
     modal: true,
     show: false,
@@ -112,33 +110,76 @@ const createWindow = async () => {
     height: 600,
     resizable: false,
     icon: path.join(__dirname, '../resources/icons/64x64.png'),
-    webPreferences:
-      process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true'
-        ? {
-            nodeIntegration: true
-          }
-        : {
-            nodeIntegration: true
-          }
+    webPreferences: {
+      nodeIntegration: true,
+      webSecurity: false
+    }
   });
 
-  childWindow.loadURL(`file://${__dirname}/app.html#/W_SR`);
+  mapWindow.loadURL(`file://${__dirname}/app.html#/W_SR`);
 
-  childWindow.setMenuBarVisibility(false);
+  mapWindow.setMenuBarVisibility(false);
 
-  childWindow.webContents.on('did-finish-load', () => {
-    if (!childWindow) {
-      throw new Error('"childWindow" is not defined');
+  mapWindow.webContents.on('did-finish-load', () => {
+    if (!mapWindow) {
+      throw new Error('"mapWindow" is not defined');
     }
     if (process.env.START_MINIMIZED) {
-      childWindow.minimize();
+      mapWindow.minimize();
     }
     // 여기 변경점 있음
   });
 
-  childWindow.on('close', e => {
+  mapWindow.on('close', e => {
     e.preventDefault();
-    childWindow?.hide();
+    mapWindow?.hide();
+  });
+
+  // #endregion
+
+  // #region 카카오페이 윈도우!
+  payWindow = new BrowserWindow({
+    parent: mainWindow,
+    modal: true,
+    show: false,
+    width: 600,
+    height: 600,
+    resizable: false,
+    icon: path.join(__dirname, '../resources/icons/64x64.png'),
+    webPreferences: {
+      nodeIntegration: false,
+      webSecurity: false
+    }
+  });
+
+  payWindow.setMenuBarVisibility(false);
+
+  payWindow.webContents.on('did-finish-load', () => {
+    if (!payWindow) {
+      throw new Error('"payWindow" is not defined');
+    }
+    if (process.env.START_MINIMIZED) {
+      payWindow.minimize();
+    }
+    // 여기 변경점 있음
+  });
+
+  payWindow.on('close', e => {
+    e.preventDefault();
+    payWindow?.hide();
+  });
+
+  payWindow.webContents.on('dom-ready', () => {
+    const windowUrl = payWindow?.webContents.getURL();
+    const cancelString = '/cancel/';
+    const successString = '/approve/';
+    if (windowUrl?.indexOf(cancelString) !== -1) {
+      paysender?.send('returnCancel', windowUrl);
+      payWindow?.hide();
+    } else if (windowUrl?.indexOf(successString) !== -1) {
+      paysender?.send('returnSuccess', windowUrl);
+      payWindow?.hide();
+    }
   });
 
   // #endregion
@@ -173,16 +214,23 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
-  if (childWindow === null) createWindow();
 });
 
 let sender: Electron.WebContents;
+let paysender: Electron.WebContents;
 
 ipcMain.on('openGoogleMaps', (event, arg) => {
-  childWindow?.show();
+  mapWindow?.loadURL(`file://${__dirname}/app.html#/W_SR`);
+  mapWindow?.show();
   sender = event.sender;
 });
 
 ipcMain.on('sendPositionData', (event, arg1, arg2, arg3) => {
   sender.send('setLatLng', arg1, arg2, arg3);
+});
+
+ipcMain.on('openKakaoPay', async (event, arg) => {
+  await payWindow?.loadURL(arg);
+  payWindow?.show();
+  paysender = event.sender;
 });
